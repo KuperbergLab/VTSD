@@ -300,7 +300,7 @@ try
                 % blank
                 Screen('Flip',wPtr);
                 
-                DrawFormattedText(wPtr,ex.stimulusMatrix{currentStim,1},'center','center',WhiteIndex(wPtr));
+                DrawFormattedText(wPtr,'--- + ---','center','center',WhiteIndex(wPtr));
                 timeToLog = Screen('Flip',wPtr,perfectRequests(1)-delayFactor);
                 if DCOMM
                     TriggerMEG(di,1);
