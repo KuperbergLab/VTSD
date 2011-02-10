@@ -1,3 +1,7 @@
+VTSD('Blink','ya29','MEG',101,1);
+fprintf('\nPress any key to continue to the next experiment...');
+KbStrokeWait;
+
 VTSD('ATLLoc','ya20','MEG',101,1);
 fprintf('\nPress any key to continue to the next experiment...');
 KbStrokeWait;
