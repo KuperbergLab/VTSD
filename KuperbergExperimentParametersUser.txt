@@ -1,0 +1,4 @@
+please keep this up to date with KuperbergExperimentParameters.txt
+BaleenMM Cross Blank Prime Blank Target Blank MEG ;
+MaskedMM Cross Blank FMask Prime BMask Target Blank MEG ;
+ATLLoc Cross Blank Word Blank Word Blank (...7 more) MEG ;
