@@ -165,7 +165,7 @@ end
 
 
 switch ex.name
-    case 'MaskedMM'
+    case {'MaskedMM', 'MaskedMM_SC'}
         maskText = '#########'; %for now
         maskSize = floor(1.65*textSize);
         instText = 'Press a button\nwhen you see\nan insect.';
@@ -176,7 +176,7 @@ switch ex.name
     case {'AXCPT','AXCPT_SC'}
         instText = 'Press a button\nwhen an\nX follows an A.';
     case 'Blink'
-        instText = 'Blink when you see the word "blink".';
+        instText = 'Blink when you see --- + ---.';
     otherwise
         instText = [];
         
@@ -299,7 +299,7 @@ try
                 
                 % blank
                 Screen('Flip',wPtr);
-                
+                Screen('TextSize',wPtr,textSize);
                 DrawFormattedText(wPtr,'--- + ---','center','center',WhiteIndex(wPtr));
                 timeToLog = Screen('Flip',wPtr,perfectRequests(1)-delayFactor);
                 if DCOMM
@@ -414,8 +414,21 @@ try
                 end
                 ex.totalITI = ex.totalITI + iti;
                 time = Screen('Flip',wPtr,perfectRequests(6)+iti-delayFactor);
-            
-            case 'MaskedMM'
+                
+                % Time to blink
+                if strcmp(ex.scanner, 'MEG')
+                    DrawFormattedText(wPtr,'--- + ---','center','center',WhiteIndex(wPtr));
+                    timeAfterRest = Screen('Flip',wPtr);
+                    %make sure the numbers in the next two lines add up to
+                    %third line
+                    blankTime = Screen('Flip',wPtr,.8+timeAfterRest);
+                    DrawFormattedText(wPtr,'+','center','center',WhiteIndex(wPtr));
+                    timeAfterBlank = Screen('Flip',wPtr,.2+blankTime);
+                    ex.totalITI = ex.totalITI + 1;
+                end
+                
+                
+            case {'MaskedMM', 'MaskedMM_SC'}
                 begTrial = GetSecs();
                 
                 %---Screen is cross, from beginning or previous
@@ -896,7 +909,7 @@ switch ex.name
     case 'BaleenMM'
         taskCode = [5 10 11 12];
         noTaskCode = [1 2 4 6 7 8 9];
-    case 'MaskedMM'
+    case {'MaskedMM', 'MaskedMM_SC'}
         % only want to look at target, maybe subject can't see
         % prime
         taskCode = [5];
