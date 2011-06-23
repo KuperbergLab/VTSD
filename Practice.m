@@ -1,5 +1,5 @@
 %for practice
-VTSD('MaskedMM','test','MEG','practice',1);
+VTSD('MaskedMM','test','MRI','practice',1);
 fprintf('\nPress any key to continue...');KbStrokeWait;
 
 VTSD('AXCPT','test','MRI','practice',1);
