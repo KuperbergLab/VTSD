@@ -1,4 +1,4 @@
-VTSD('Blink','ya29','MEG',101,1);
+VTSD('Blink','ya20','MEG',101,1);
 fprintf('\nPress any key to continue to the next experiment...');
 KbStrokeWait;
 
