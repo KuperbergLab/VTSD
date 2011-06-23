@@ -8,6 +8,7 @@ function VTSD(exname,subjectname,scanner,list,run)
 % https://gate.nmr.mgh.harvard.edu/wiki/kuperberg-lab/index.php/VTSD
 
 %% Section 0
+warning('off','MATLAB:dispatcher:InexactCaseMatch');
 clc;
 keyboards = GetKeyboardIndices();
 if length(keyboards) == 1
@@ -149,7 +150,7 @@ ex.totalITI = 0;
 ex.paramsCumSum = cumsum(ex.params(1:end-1))/1000;
 ex.trialTime = sum(ex.params(1:end-1))/1000;
 
-fprintf('\n\nPress any key to begin the experiment...\n');
+fprintf('\n\nExperimenter: waiting for trigger from machine...\n');
 WaitSecs(.2);
 [keyDown, secs, keyCode] = KbCheck(-1);
 while ~keyDown
@@ -365,6 +366,7 @@ try
                 
                 % Time to blink
                 if strcmp(ex.scanner, 'MEG') && mod(currentStim,2) == 0
+                    Screen('TextSize',wPtr,crossSize);
                     DrawFormattedText(wPtr,'--- + ---','center','center',WhiteIndex(wPtr));
                     timeAfterRest = Screen('Flip',wPtr);
                     %make sure the numbers in the next two lines add up to
@@ -426,7 +428,6 @@ try
                     timeAfterBlank = Screen('Flip',wPtr,.2+blankTime);
                     ex.totalITI = ex.totalITI + 1;
                 end
-                
                 
             case {'MaskedMM', 'MaskedMM_SC'}
                 begTrial = GetSecs();
